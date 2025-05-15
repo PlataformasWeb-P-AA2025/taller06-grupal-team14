@@ -1,9 +1,11 @@
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import declarative_base
 
+# Conexión a la base de datos SQLite
 engine = create_engine('sqlite:///basepais.db')
 Base = declarative_base()
 
+# Definición del modelo 'Pais' como tabla
 class Pais(Base):
     __tablename__ = 'lospaises'
     
@@ -17,4 +19,7 @@ class Pais(Base):
     lenguajes = Column(String)           # "Languages"
     es_independiente = Column(String)    # "is_independent"
 
+# Crea la tabla si no existe
 Base.metadata.create_all(engine)
+
+# RDenis19 & cbhas

@@ -1,8 +1,8 @@
 from sqlalchemy import create_engine, or_
 from sqlalchemy.orm import sessionmaker
-from genera_base import Pais
+from generar_base import Pais
 
-# Crear motor y sesión
+# Conexión a la base de datos y sesión
 engine = create_engine('sqlite:///basepais.db')
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -44,3 +44,5 @@ paises = session.query(Pais).filter(
 ).all()
 for p in paises:
     print(p.nombre_pais, "-", p.capital)
+    
+# RDenis19 & cbhas

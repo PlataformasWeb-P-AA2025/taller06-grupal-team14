@@ -1,16 +1,18 @@
 import requests
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from genera_base import Pais
+from generar_base import Pais  # Importa la clase Pais desde el archivo con el modelo
 
+# Conexión a la base de datos y sesión
 engine = create_engine('sqlite:///basepais.db')
 Session = sessionmaker(bind=engine)
 session = Session()
 
-url = "https://pkgstore.datahub.io/core/country-codes/country-codes_json/data/616b1fb83cbfd4eb6d9e7d52924bb00a/country-codes_json.json"
-response = requests.get(url)
+# Descarga del JSON con los datos de países
+response = requests.get("https://pkgstore.datahub.io/core/country-codes/country-codes_json/data/616b1fb83cbfd4eb6d9e7d52924bb00a/country-codes_json.json")
 datos_json = response.json()
 
+# Carga de datos a la base
 for item in datos_json:
     pais = Pais(
         nombre_pais=item.get("CLDR display name"),
@@ -24,4 +26,6 @@ for item in datos_json:
     )
     session.add(pais)
 
-session.commit()
+session.commit()  # Guarda todos los cambios
+
+# RDenis19 & cbhas
